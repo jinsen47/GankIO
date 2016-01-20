@@ -67,6 +67,9 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pL1-b2-Ats" secondAttribute="bottom" id="biu-LK-STT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="myTableView" destination="pL1-b2-Ats" id="U0j-Gh-6na"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
