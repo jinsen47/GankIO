@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -41,30 +42,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cellIdentifier = "cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CustomTableViewCell
         
-        cell.titleLabel.text = titleNames[indexPath.row]
-        cell.dateLabel.text = titleNames[indexPath.row]
         
-        let imageHeight = cell.beautyImageView.bounds.height
-        let imageWidth = cell.beautyImageView.bounds.width
         
-        let originImage = UIImage(data: NSData(contentsOfURL: NSURL(string: beautyImages[indexPath.row])!)!)
-//        print("第\(indexPath.row)张图片的宽是 \(originImage?.size.width), 高是 \(originImage?.size.height)")
-        
-        let resizedImage : UIImage
-        if originImage?.size.height > originImage?.size.width {
-            let resize = CGSizeMake(imageWidth, (originImage?.size.height)! * imageWidth /  (originImage?.size.width)!)
-//            print("缩放大小 \(resize.width) * \(resize.height)")
-            resizedImage = resizeImage(originImage!, size: resize)
-        } else {
-            let resize = CGSizeMake((originImage?.size.width)! * imageHeight / (originImage?.size.height)!, imageHeight)
-//            print("缩放大小 \(resize.width) * \(resize.height)")
-            resizedImage = resizeImage(originImage!, size: resize)
-            
-        }
-        
-        let cropImage = cropRectImage(resizedImage, targetSize: CGSizeMake(screenWidth, imageHeight))
-        
-        cell.beautyImageView.image = cropImage
+//        cell.beautyImageView.image = cropImage
+        cell.beautyImageView.kf_setImageWithURL(NSURL(string: beautyImages[indexPath.row])!,
+            placeholderImage: nil,
+            optionsInfo: nil,
+            progressBlock: {(receive, total) -> () in
+            },
+            completionHandler: { (image, error, cacheType, imageUrl) -> () in
+                cell.titleLabel.text = self.self.titleNames[indexPath.row]
+                cell.dateLabel.text = self.self.titleNames[indexPath.row]
+                
+                let imageHeight = cell.beautyImageView.bounds.height
+                let imageWidth = cell.beautyImageView.bounds.width
+                
+                let originImage = image
+                
+                let resizedImage : UIImage
+                if originImage?.size.height > originImage?.size.width {
+                    let resize = CGSizeMake(imageWidth, (originImage?.size.height)! * imageWidth /  (originImage?.size.width)!)
+                    resizedImage = self.resizeImage(originImage!, size: resize)
+                } else {
+                    let resize = CGSizeMake((originImage?.size.width)! * imageHeight / (originImage?.size.height)!, imageHeight)
+                    resizedImage = self.resizeImage(originImage!, size: resize)
+                    
+                }
+                
+                let cropImage = self.cropRectImage(resizedImage, targetSize: CGSizeMake(self.self.screenWidth, imageHeight))
+                cell.beautyImageView.image = cropImage
+            }
+        )
         return cell
     }
     
