@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F0DA6381C536BDD0026AC1D /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0DA6371C536BDD0026AC1D /* ImageDetailViewController.swift */; };
 		92A195201C4DDF4500416EEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1951F1C4DDF4500416EEC /* AppDelegate.swift */; };
 		92A195221C4DDF4500416EEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A195211C4DDF4500416EEC /* ViewController.swift */; };
 		92A195251C4DDF4500416EEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A195231C4DDF4500416EEC /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		6A385EE6FCBA380865B64176 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6F0DA6371C536BDD0026AC1D /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		92A1951C1C4DDF4500416EEC /* GankIO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GankIO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92A1951F1C4DDF4500416EEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92A195211C4DDF4500416EEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				92A195261C4DDF4500416EEC /* Assets.xcassets */,
 				92A195281C4DDF4500416EEC /* LaunchScreen.storyboard */,
 				92A1952B1C4DDF4500416EEC /* Info.plist */,
+				6F0DA6371C536BDD0026AC1D /* ImageDetailViewController.swift */,
 			);
 			path = GankIO;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				TargetAttributes = {
 					92A1951B1C4DDF4500416EEC = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = 3VR5D3SS4J;
 					};
 					92A1952F1C4DDF4500416EEC = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -339,6 +343,7 @@
 				92A1954E1C4E0F2C00416EEC /* CustomTableViewCell.swift in Sources */,
 				92A195221C4DDF4500416EEC /* ViewController.swift in Sources */,
 				92A195201C4DDF4500416EEC /* AppDelegate.swift in Sources */,
+				6F0DA6381C536BDD0026AC1D /* ImageDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,10 +485,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GankIO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhuduan.GankIO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.jinsen47.GankIO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -493,10 +501,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GankIO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhuduan.GankIO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.jinsen47.GankIO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

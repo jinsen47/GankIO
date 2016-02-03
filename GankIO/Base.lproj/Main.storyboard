@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ygH-Lg-nYX">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--GankIO-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GankIO" customModuleProvider="target" sceneMemberID="viewController">
@@ -23,24 +23,26 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="270" id="jPe-bD-HQj" customClass="CustomTableViewCell" customModule="GankIO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="270"/>
+                                        <rect key="frame" x="0.0" y="92" width="320" height="270"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jPe-bD-HQj" id="3Xa-Bh-B0a">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="jPe-bD-HQj" id="3Xa-Bh-B0a">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="269.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CB7-Rr-JKh">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JF-RX-y1a" userLabel="beautyImageButton">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2B-Nb-jx7">
-                                                    <rect key="frame" x="30" y="104" width="260" height="31"/>
-                                                    <color key="backgroundColor" red="0.92258522727272729" green="0.92258522727272729" blue="0.92258522727272729" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <connections>
+                                                        <segue destination="tr9-7k-gPZ" kind="push" identifier="imageDetailSegue" id="cST-DC-nrm"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8I-7R-wZy" userLabel="titleButton">
+                                                    <rect key="frame" x="60" y="105" width="200" height="30"/>
+                                                    <connections>
+                                                        <segue destination="hFU-t6-muH" kind="push" identifier="gankDetailSegue" id="6hq-VB-jje"/>
+                                                    </connections>
+                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pp-Sq-B1p">
-                                                    <rect key="frame" x="242" y="247" width="70" height="21"/>
+                                                    <rect key="frame" x="177" y="248" width="135" height="21"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -48,9 +50,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="beautyImageView" destination="CB7-Rr-JKh" id="tVE-Ia-I6z"/>
+                                            <outlet property="beautyImageButton" destination="4JF-RX-y1a" id="FLB-Nm-lX6"/>
                                             <outlet property="dateLabel" destination="0pp-Sq-B1p" id="4au-qB-JPf"/>
-                                            <outlet property="titleLabel" destination="E2B-Nb-jx7" id="coS-vG-XV8"/>
+                                            <outlet property="titleButton" destination="u8I-7R-wZy" id="Iws-8P-Ng6"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -67,11 +69,77 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pL1-b2-Ats" secondAttribute="bottom" id="biu-LK-STT"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="GankIO" id="oiY-lM-eX5"/>
                     <connections>
                         <outlet property="myTableView" destination="pL1-b2-Ats" id="U0j-Gh-6na"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="711" y="366"/>
+        </scene>
+        <!--ImageDetail-->
+        <scene sceneID="bYo-t2-xqA">
+            <objects>
+                <viewController title="ImageDetail" id="tr9-7k-gPZ" customClass="ImageDetailViewController" customModule="GankIO" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iY0-om-Tpm"/>
+                        <viewControllerLayoutGuide type="bottom" id="c3I-zf-3UB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oFm-Jo-X9V">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dlt-xq-dXQ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="q4W-K2-9w1"/>
+                    <connections>
+                        <outlet property="bigImageView" destination="dlt-xq-dXQ" id="gor-k2-3aL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OXJ-ZH-6IL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1150" y="46"/>
+        </scene>
+        <!--GankDetail-->
+        <scene sceneID="8Bv-lY-KiG">
+            <objects>
+                <viewController title="GankDetail" id="hFU-t6-muH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LAx-p0-Q8J"/>
+                        <viewControllerLayoutGuide type="bottom" id="jwr-QF-DZT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fMz-1k-BQX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3q6-7S-Vvn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hD-cu-9x7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1150" y="688"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SZ8-cB-li1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ygH-Lg-nYX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tID-KS-eiL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="gIb-10-Tz1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ehA-jT-xzM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="179" y="366"/>
         </scene>

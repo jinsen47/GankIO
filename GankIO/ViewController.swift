@@ -8,32 +8,70 @@
 
 import UIKit
 import Kingfisher
+import PullToRefreshSwift
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     @IBOutlet weak var myTableView: UITableView!
     
-    let API = "http://gank.avosapps.com/api/data/%E7%A6%8F%E5%88%A9/10/1"
+    let API = "http://gank.avosapps.com/api/data/%E7%A6%8F%E5%88%A9/10/"
+    var page = 1
     
     var titleNames = [String]()
     var beautyImages = [String]()
     var mockImage = "pic1"
     
     var screenWidth: CGFloat = 0.0
+    var screenHeight: CGFloat = 0.0
+    
+    var cellHeight: CGFloat = 0.0
+    
+    var isLoading: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        myTableView.delegate = self
+        myTableView.dataSource = self
+        
         // Do any additional setup after loading the view, typically from a nib.
-        loadData(API)
-        self.screenWidth = UIScreen.mainScreen().bounds.width
+        loadData(API + "\(page)")
+        if screenHeight == 0.0 || screenWidth == 0.0 {
+            self.screenWidth = UIScreen.mainScreen().bounds.width
+            self.screenHeight = UIScreen.mainScreen().bounds.height
+        }
+        
+        self.myTableView.addPullToRefresh(refreshCompletion: { [weak self] in
+            if let isLoading = self?.isLoading {
+                if isLoading {
+                    return
+                }
+            }
+            self?.titleNames = []
+            self?.beautyImages = []
+            self?.page = 1
+            self?.loadData(((self?.API)! + "\(self?.page)"))
+        })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        print("\(scrollView.contentOffset.y + myTableView.bounds.height)")
+        if scrollView.contentOffset.y + screenHeight > CGFloat(titleNames.count) * cellHeight {
+            if isLoading {
+                return
+            } else {
+                isLoading = true
+                loadData(self.API + "\(++page)")
+            }
+        }
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titleNames.count
     }
@@ -42,20 +80,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cellIdentifier = "cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CustomTableViewCell
         
-        
+        if cellHeight == 0.0 {
+            cellHeight = cell.bounds.height
+        }
+        cell.titleButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        cell.titleButton.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.5)
+        cell.titleButton.setTitle(titleNames[indexPath.row], forState: UIControlState.Normal)
+        cell.dateLabel.text = self.titleNames[indexPath.row]
         
 //        cell.beautyImageView.image = cropImage
-        cell.beautyImageView.kf_setImageWithURL(NSURL(string: beautyImages[indexPath.row])!,
+        cell.beautyImageButton.imageView?.kf_setImageWithURL(NSURL(string: beautyImages[indexPath.row])!,
             placeholderImage: nil,
             optionsInfo: nil,
             progressBlock: {(receive, total) -> () in
             },
             completionHandler: { (image, error, cacheType, imageUrl) -> () in
-                cell.titleLabel.text = self.self.titleNames[indexPath.row]
-                cell.dateLabel.text = self.self.titleNames[indexPath.row]
-                
-                let imageHeight = cell.beautyImageView.bounds.height
-                let imageWidth = cell.beautyImageView.bounds.width
+                let imageHeight = cell.beautyImageButton.bounds.height
+                let imageWidth = cell.beautyImageButton.bounds.width
                 
                 let originImage = image
                 
@@ -70,10 +111,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
                 
                 let cropImage = self.cropRectImage(resizedImage, targetSize: CGSizeMake(self.self.screenWidth, imageHeight))
-                cell.beautyImageView.image = cropImage
+                cell.beautyImageButton.setBackgroundImage(cropImage, forState: UIControlState.Normal)
+                cell.beautyImageButton.setTitle("", forState: UIControlState.Normal)
             }
         )
+        
+        cell.beautyImageButton.tag = indexPath.row
+        cell.titleButton.tag = indexPath.row
         return cell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let row = (sender as! UIButton).tag
+        if segue.identifier == "imageDetailSegue" {
+            let destController = segue.destinationViewController as! ImageDetailViewController
+            destController.imageUrl = self.beautyImages[row]
+            print("prepareSegue imageUrl = \(self.beautyImages[row])")
+        }
     }
     
     // hide status bar
@@ -102,6 +156,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                     dispatch_async(dispatch_get_main_queue(), {
                         self.self.myTableView.reloadData()
+                        self.self.myTableView.stopPullToRefresh()
+                        self.self.isLoading = false
                     })
                 }
             }
@@ -149,6 +205,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("image crop FAILED!")
             return image
         }
+    }
+    
+    func generateApiUrl(baseUrl: String, count: Int, page: Int) ->NSURL {
+        return NSURL(string: baseUrl + "\(count)" + "/" + "\(page)")!
     }
 }
 
